@@ -1,0 +1,36 @@
+﻿@model IEnumerable<TesteCorrentista.Models.Transacao>
+
+<h2>Extrato</h2>
+
+<form method="get" asp-controller="Extrato" asp-action="Index">
+    <select name="dias">
+        <option value="5">5 dias</option>
+        <option value="10">10 dias</option>
+        <option value="15">15 dias</option>
+        <option value="20">20 dias</option>
+    </select>
+    <input type="submit" value="Filtrar" />
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Data</th>
+            <th>Tipo</th>
+            <th>Valor</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Data.ToString("dd/MM")</td>
+                <td>@item.Tipo</td>
+                <td>@item.Valor.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="@Url.Action("ExportarPdf")">Compartilhar como PDF</a>
+
